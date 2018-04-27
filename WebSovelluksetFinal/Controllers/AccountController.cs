@@ -20,7 +20,7 @@ namespace WebSovelluksetFinal.Controllers
     [Authorize]
     //[Route("[controller]/[action]")]
     public class AccountController : Controller
-    {
+    {//asdfasdf
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly IEmailSender _emailSender;
