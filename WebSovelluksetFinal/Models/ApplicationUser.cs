@@ -21,7 +21,7 @@ namespace WebSovelluksetFinal.Models
         [Required]
         public double SizeOfHouse { get; set; }
         [Required]
-        public int HouseTypeID { get; set; }
+        public int? HouseTypeID { get; set; }
         public HouseType HouseType { get; set; }
     }
 }

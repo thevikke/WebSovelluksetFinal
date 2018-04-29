@@ -179,6 +179,36 @@ namespace WebSovelluksetFinal.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
+            migrationBuilder.CreateTable(
+                name: "Order",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    ApproveDate = table.Column<DateTime>(nullable: false),
+                    Comment = table.Column<string>(nullable: true),
+                    Description = table.Column<string>(nullable: true),
+                    DiscardDate = table.Column<DateTime>(nullable: false),
+                    EstimatedCost = table.Column<int>(nullable: false),
+                    FinishDate = table.Column<DateTime>(nullable: false),
+                    Hours = table.Column<int>(nullable: false),
+                    MachineryUsed = table.Column<string>(nullable: true),
+                    OrderDate = table.Column<DateTime>(nullable: false),
+                    StartDate = table.Column<DateTime>(nullable: false),
+                    Status = table.Column<string>(nullable: true),
+                    UserID = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Order", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_Order_AspNetUsers_UserID",
+                        column: x => x.UserID,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
@@ -222,6 +252,11 @@ namespace WebSovelluksetFinal.Migrations
                 column: "NormalizedUserName",
                 unique: true,
                 filter: "[NormalizedUserName] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Order_UserID",
+                table: "Order",
+                column: "UserID");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -240,6 +275,9 @@ namespace WebSovelluksetFinal.Migrations
 
             migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
+
+            migrationBuilder.DropTable(
+                name: "Order");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");

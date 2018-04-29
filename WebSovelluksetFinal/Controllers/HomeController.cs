@@ -4,11 +4,21 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using WebSovelluksetFinal.Data;
 
 namespace WebSovelluksetFinal.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly ApplicationDbContext _context;
+
+        public HomeController(ApplicationDbContext context)
+        {
+            _context = context;
+
+        }
+
         // GET: Home
         public ActionResult Index()
         {
@@ -88,6 +98,15 @@ namespace WebSovelluksetFinal.Controllers
             {
                 return View();
             }
+        }
+
+        public async Task<IActionResult> GetOrders()
+        {
+            var result = from s in _context.Orders
+                         where s.User.UserName == User.Identity.Name
+                         select s;
+
+            return PartialView("OrdersList",await result.ToListAsync());
         }
     }
 }

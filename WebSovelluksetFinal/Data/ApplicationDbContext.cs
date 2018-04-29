@@ -19,13 +19,14 @@ namespace WebSovelluksetFinal.Data
         {
             base.OnModelCreating(builder);
             builder.Entity<HouseType>().ToTable("HouseType");
+            builder.Entity<Tilaus>().ToTable("Order");
             // Customize the ASP.NET Identity model and override the defaults if needed.
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
-
-        public DbSet<WebSovelluksetFinal.Models.ApplicationUser> ApplicationUser { get; set; }
-        public DbSet<HouseType> HouseTypes { get; set; }
+        public DbSet<WebSovelluksetFinal.Models.Tilaus> Orders { get; set; }
+        public DbSet<WebSovelluksetFinal.Models.ApplicationUser> ApplicationUsers { get; set; }
+        public DbSet<WebSovelluksetFinal.Models.HouseType> HouseTypes { get; set; }
     }
 }
 

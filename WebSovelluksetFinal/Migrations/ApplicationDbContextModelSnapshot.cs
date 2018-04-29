@@ -149,7 +149,8 @@ namespace WebSovelluksetFinal.Migrations
 
                     b.Property<bool>("EmailConfirmed");
 
-                    b.Property<int>("HouseTypeID");
+                    b.Property<int?>("HouseTypeID")
+                        .IsRequired();
 
                     b.Property<bool>("LockoutEnabled");
 
@@ -210,6 +211,42 @@ namespace WebSovelluksetFinal.Migrations
                     b.ToTable("HouseType");
                 });
 
+            modelBuilder.Entity("WebSovelluksetFinal.Models.Tilaus", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("ApproveDate");
+
+                    b.Property<string>("Comment");
+
+                    b.Property<string>("Description");
+
+                    b.Property<DateTime>("DiscardDate");
+
+                    b.Property<int>("EstimatedCost");
+
+                    b.Property<DateTime>("FinishDate");
+
+                    b.Property<int>("Hours");
+
+                    b.Property<string>("MachineryUsed");
+
+                    b.Property<DateTime>("OrderDate");
+
+                    b.Property<DateTime>("StartDate");
+
+                    b.Property<string>("Status");
+
+                    b.Property<string>("UserID");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("UserID");
+
+                    b.ToTable("Order");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -261,6 +298,13 @@ namespace WebSovelluksetFinal.Migrations
                         .WithMany()
                         .HasForeignKey("HouseTypeID")
                         .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("WebSovelluksetFinal.Models.Tilaus", b =>
+                {
+                    b.HasOne("WebSovelluksetFinal.Models.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserID");
                 });
 #pragma warning restore 612, 618
         }

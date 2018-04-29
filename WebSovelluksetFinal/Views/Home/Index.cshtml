@@ -3,5 +3,120 @@
     ViewData["Title"] = "Index";
 }
 
-<h2>Index</h2>
 
+<script srs="~Scripts/Jquery/jquery-3.3.1.js"></script>
+<script srs="~Scripts/Jquery-ui/jquery-ui.js"></script>
+@section scripts
+    {
+
+    <script>
+        //------------------------------Fetch----------------------------------------------------------------------------------------------
+        $(document).ready(function () {
+            debugger
+            getOrders();
+        });
+        function getOrders() {
+            $("#divOrdersList").load("/Home/GetOrders");
+        }
+        //------------------------------Delete----------------------------------------------------------------------------------------------
+        function deleteClicked(id) {
+
+            // jQuery UI pitää lisät Bower:n kautta (Projektin päällä hiiren oikean napin alta Manage Bower Packages ... )
+            $("#deleteDialog").load("/Asiakas/DeleteView", { id: id }, function () {
+
+                $("#deleteDialog").dialog(
+                    {
+                        title: "Poistetaanko asiakas?", width: 600, height: 400, modal: true, buttons: {
+                            OK: function () {
+                                deleteStudent(id, $(this));
+                            },
+                            Cancel: function () { $(this).dialog("close") }
+                        }
+                    })
+            });
+        }
+
+        function deleteStudent(id, dlg) {
+            $.get("/Asiakas/Delete/" + id, function (data) {
+                if (data.status == "OK") {
+                    dlg.dialog("close");
+                    getStudents();
+                }
+            });
+
+        }
+
+        //------------------------------Create----------------------------------------------------------------------------------------------
+        function newStudentClicked() {
+            $("#newDialog").load("/Asiakas/CreateView", function () {
+                $("#newDialog").dialog(
+                    {
+                        title: "Anna opiskelijan tiedot", width: 600, height: 800, modal: true, buttons: {
+                            OK: function () {
+                                createStudent($(this));
+                            },
+                            Cancel: function () { $(this).dialog("close") }
+                        }
+                    })
+            });
+        }
+        function createStudent(dlg) {
+            var newoppilas = $("#newStudentForm").serialize();
+
+            $.ajax({
+                type: "POST",
+                data: newoppilas,
+                dataType: "json",
+                url: "/Asiakas/CreateStudent/",
+                success: function (data) {
+                    alert(data.msg);
+                    dlg.dialog("close");
+                    getStudents();
+                },
+                error: function (data) {
+                    alert(data.msg);
+                }
+            });
+        }
+        //------------------------------Edit----------------------------------------------------------------------------------------------
+        function editClicked(id) {
+
+            // jQuery UI pitää lisät Bower:n kautta (Projektin päällä hiiren oikean napin alta Manage Bower Packages ... )
+            $("#editDialog").load("/Asiakas/EditView", { id: id }, function () {
+
+                $("#editDialog").dialog(
+                    {
+                        title: "Poistetaanko asiakas?", width: 600, height: 800, modal: true, buttons: {
+                            OK: function () {
+                                editStudent($(this));
+                            },
+                            Cancel: function () { $(this).dialog("close") }
+                        }
+                    })
+            });
+        }
+        function editStudent(dlg) {
+
+            var oppilas = $("#editStudentForm").serialize();
+
+            $.ajax({
+                type: "POST",
+                data: oppilas,
+                dataType: "json",
+                url: "/Asiakas/EditStudent/",
+                success: function (data) {
+                    alert(data.msg);
+                    dlg.dialog("close");
+                    getStudents();
+                },
+                error: function (data) {
+                    alert(data.msg);
+                }
+            });
+        }
+
+    </script>
+}
+
+<div id="divOrdersList">
+</div>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,10 +11,13 @@ namespace WebSovelluksetFinal.Models
     {
         public int ID { get; set; }
 
-        public int ApplicationUserID { get; set; }
+        public string UserID { get; set; }//Remember the standard ID for user in mvc template is string not INT and nobody is telling this to you....
+        public ApplicationUser User { get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; } 
+        public int EstimatedCost { get; set; }
 
+        public string Status { get; set; }
+        
         public int Hours { get; set; }
 
         [DataType(DataType.MultilineText)]
@@ -24,6 +28,7 @@ namespace WebSovelluksetFinal.Models
 
         [DataType(DataType.MultilineText)]
         public string MachineryUsed { get; set; }
+
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
