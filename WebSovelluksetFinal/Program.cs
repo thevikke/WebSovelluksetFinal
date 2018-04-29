@@ -23,7 +23,7 @@ namespace WebSovelluksetFinal
                 var services = scope.ServiceProvider;
                 try
                 {
-                    var context = services.GetRequiredService<DataContext>();
+                    var context = services.GetRequiredService<ApplicationDbContext>();
                     DbInitializer.Initialize(context);
                 }
                 catch (Exception ex)

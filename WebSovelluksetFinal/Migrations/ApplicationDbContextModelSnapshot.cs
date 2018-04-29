@@ -8,7 +8,7 @@ using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 using WebSovelluksetFinal.Data;
 
-namespace WebSovelluksetFinal.Data.Migrations
+namespace WebSovelluksetFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     partial class ApplicationDbContextModelSnapshot : ModelSnapshot
