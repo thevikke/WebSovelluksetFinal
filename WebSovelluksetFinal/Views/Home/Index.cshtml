@@ -22,9 +22,9 @@
 
                 $("#deleteDialog").dialog(
                     {
-                        title: "Poistetaanko asiakas?", width: 600, height: 400, modal: true, buttons: {
+                        title: "Delete order?", width: 800, height: 400, modal: true, buttons: {
                             OK: function () {
-                                deleteStudent(id, $(this));
+                                deleteOrder(id, $(this));
                             },
                             Cancel: function () { $(this).dialog("close") }
                         }
@@ -32,11 +32,11 @@
             });
         }
 
-        function deleteStudent(id, dlg) {
-            $.get("/Asiakas/Delete/" + id, function (data) {
+        function deleteOrder(id, dlg) {
+            $.get("/Home/Delete/" + id, function (data) {
                 if (data.status == "OK") {
                     dlg.dialog("close");
-                    getStudents();
+                    getOrders();
                 }
             });
 

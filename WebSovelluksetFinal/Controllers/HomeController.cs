@@ -89,20 +89,17 @@ namespace WebSovelluksetFinal.Controllers
         }
 
         // POST: Home/Delete/5
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
 
-                return RedirectToAction(nameof(Index));
-            }
-            catch
-            {
-                return View();
-            }
+        public IActionResult Delete(int id)
+        {
+            var r = _context.Orders.Where(t => t.ID == id).SingleOrDefault();
+
+            _context.Orders.Remove(r);
+            _context.SaveChanges();
+
+            // HUOM! ObjectResult sisältää automatic content negotiation:n
+            return new JsonResult(new { status = "OK" });
+            //return Json(new { status = "OK" });
         }
 
         public IActionResult GetOrders()
