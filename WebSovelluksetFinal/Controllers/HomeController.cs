@@ -78,9 +78,14 @@ namespace WebSovelluksetFinal.Controllers
         }
 
         // GET: Home/Delete/5
-        public ActionResult Delete(int id)
+        public IActionResult DeleteView(int id)
         {
-            return View();
+            var r = from s in _context.Orders
+                    select s;
+
+            r = r.Where(t => t.ID == id);
+
+            return PartialView("OrdersList", r);
         }
 
         // POST: Home/Delete/5
@@ -100,13 +105,13 @@ namespace WebSovelluksetFinal.Controllers
             }
         }
 
-        public async Task<IActionResult> GetOrders()
+        public IActionResult GetOrders()
         {
             var result = from s in _context.Orders
                          where s.User.UserName == User.Identity.Name
                          select s;
 
-            return PartialView("OrdersList",await result.ToListAsync());
+            return PartialView("OrdersList", result);
         }
     }
 }

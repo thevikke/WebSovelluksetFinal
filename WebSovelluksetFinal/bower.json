@@ -1,0 +1,27 @@
+{
+  "name": "test",
+  "description": "test",
+  "main": "test",
+  "keywords": [
+    "test"
+  ],
+  "authors": [
+    "test"
+  ],
+  "license": "test",
+  "homepage": "test",
+  "dependencies": {
+    "jquery": "2.2.0",
+    "jquery-ui": "1.12.1",
+    "bootstrap": "v4.1.0",
+    "jquery-validation-unobtrusive": "v3.2.9",
+    "jquery-validation": ">=1.8"
+  },
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}

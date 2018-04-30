@@ -3,16 +3,13 @@
     ViewData["Title"] = "Index";
 }
 
-
-<script srs="~Scripts/Jquery/jquery-3.3.1.js"></script>
-<script srs="~Scripts/Jquery-ui/jquery-ui.js"></script>
 @section scripts
     {
 
     <script>
         //------------------------------Fetch----------------------------------------------------------------------------------------------
         $(document).ready(function () {
-            debugger
+
             getOrders();
         });
         function getOrders() {
@@ -20,9 +17,8 @@
         }
         //------------------------------Delete----------------------------------------------------------------------------------------------
         function deleteClicked(id) {
-
             // jQuery UI pitää lisät Bower:n kautta (Projektin päällä hiiren oikean napin alta Manage Bower Packages ... )
-            $("#deleteDialog").load("/Asiakas/DeleteView", { id: id }, function () {
+            $("#deleteDialog").load("/Home/DeleteView", { id: id }, function () {
 
                 $("#deleteDialog").dialog(
                     {
@@ -119,4 +115,10 @@
 }
 
 <div id="divOrdersList">
+</div>
+<div id="deleteDialog">
+</div>
+<div id="newDialog">
+</div>
+<div id="editDialog">
 </div>
