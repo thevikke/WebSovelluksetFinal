@@ -2,6 +2,9 @@
 @{
     ViewData["Title"] = "Index";
 }
+<div>
+    <input type="button" id="new" value="New order" onclick="newOrderClicked();" />
+</div>
 
 @section scripts
     {
@@ -18,11 +21,11 @@
         //------------------------------Delete----------------------------------------------------------------------------------------------
         function deleteClicked(id) {
             // jQuery UI pitää lisät Bower:n kautta (Projektin päällä hiiren oikean napin alta Manage Bower Packages ... )
-            $("#deleteDialog").load("/Home/DeleteView", { id: id }, function () {
 
+            $("#deleteDialog").load("/Home/DeleteView", { id: id }, function () {
                 $("#deleteDialog").dialog(
                     {
-                        title: "Delete order?", width: 800, height: 400, modal: true, buttons: {
+                        title: "Delete order?", width: 1600, height: 200, modal: true, buttons: {
                             OK: function () {
                                 deleteOrder(id, $(this));
                             },
@@ -43,31 +46,31 @@
         }
 
         //------------------------------Create----------------------------------------------------------------------------------------------
-        function newStudentClicked() {
-            $("#newDialog").load("/Asiakas/CreateView", function () {
+        function newOrderClicked() {
+            $("#newDialog").load("/Home/CreateView", function () {
                 $("#newDialog").dialog(
                     {
-                        title: "Anna opiskelijan tiedot", width: 600, height: 800, modal: true, buttons: {
+                        title: "Give order info", width: 600, height: 200, modal: true, buttons: {
                             OK: function () {
-                                createStudent($(this));
+                                createOrder($(this));
                             },
                             Cancel: function () { $(this).dialog("close") }
                         }
                     })
             });
         }
-        function createStudent(dlg) {
-            var newoppilas = $("#newStudentForm").serialize();
+        function createOrder(dlg) {
+            var newoppilas = $("#newOrderForm").serialize();
 
             $.ajax({
                 type: "POST",
                 data: newoppilas,
                 dataType: "json",
-                url: "/Asiakas/CreateStudent/",
+                url: "/Home/CreateOrder/",
                 success: function (data) {
                     alert(data.msg);
                     dlg.dialog("close");
-                    getStudents();
+                    getOrders();
                 },
                 error: function (data) {
                     alert(data.msg);

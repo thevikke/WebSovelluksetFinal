@@ -11,9 +11,10 @@ using WebSovelluksetFinal.Data;
 namespace WebSovelluksetFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20180503214416_test1")]
+    partial class test1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -216,25 +217,25 @@ namespace WebSovelluksetFinal.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime?>("ApproveDate");
+                    b.Property<DateTime>("ApproveDate");
 
                     b.Property<string>("Comment");
 
                     b.Property<string>("Description");
 
-                    b.Property<DateTime?>("DiscardDate");
+                    b.Property<DateTime>("DiscardDate");
 
-                    b.Property<int?>("EstimatedCost");
+                    b.Property<int>("EstimatedCost");
 
-                    b.Property<DateTime?>("FinishDate");
+                    b.Property<DateTime>("FinishDate");
 
-                    b.Property<int?>("Hours");
+                    b.Property<int>("Hours");
 
                     b.Property<string>("MachineryUsed");
 
-                    b.Property<DateTime?>("OrderDate");
+                    b.Property<DateTime>("OrderDate");
 
-                    b.Property<DateTime?>("StartDate");
+                    b.Property<DateTime>("StartDate");
 
                     b.Property<string>("Status");
 

@@ -4,10 +4,6 @@
     ViewData["Title"] = "Orders List";
 }
 
-
-@{
-    if (Model != null)
-    {
         <table class="table">
             <thead>
                 <tr>
@@ -84,21 +80,7 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.DiscardDate)
                         </td>
-                        <td>
-                            @if (item.Status == "TILATTU")
-                            {
-                                <a onclick="editClicked(@item.ID)">Edit</a>
-                                <a onclick="deleteClicked(@item.ID)">Delete</a>
-                            }
-                        </td>
                     </tr>
                 }
             </tbody>
         </table>
-    }
-    else
-    {
-        @ViewData["STATUSERROR"];
-
-    }
-}

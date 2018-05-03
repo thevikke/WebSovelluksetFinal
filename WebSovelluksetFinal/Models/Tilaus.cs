@@ -14,11 +14,11 @@ namespace WebSovelluksetFinal.Models
         public string UserID { get; set; }//Remember the standard ID for user in mvc template is string not INT and nobody is telling this to you....
         public ApplicationUser User { get; set; }
 
-        public int EstimatedCost { get; set; }
+        public int? EstimatedCost { get; set; }
 
         public string Status { get; set; }
         
-        public int Hours { get; set; }
+        public int? Hours { get; set; }
 
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
@@ -32,22 +32,22 @@ namespace WebSovelluksetFinal.Models
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime OrderDate { get; set; }
+        public DateTime? OrderDate { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime StartDate { get; set; }
+        public DateTime? StartDate { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime FinishDate { get; set; }
+        public DateTime? FinishDate { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime ApproveDate { get; set; }
+        public DateTime? ApproveDate { get; set; }
 
         [DataType(DataType.Date)]
         [DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:dd/MM/yyyy}")]
-        public DateTime DiscardDate { get; set; }
+        public DateTime? DiscardDate { get; set; }
     }
 }

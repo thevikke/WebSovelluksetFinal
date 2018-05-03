@@ -1,22 +1,29 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using WebSovelluksetFinal.Data;
+using WebSovelluksetFinal.Models;
 
 namespace WebSovelluksetFinal.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private readonly ApplicationDbContext _context;
-
-        public HomeController(ApplicationDbContext context)
+        private readonly UserManager<ApplicationUser> _UserManager;
+        public HomeController(ApplicationDbContext context, UserManager<ApplicationUser> UserManager)
         {
             _context = context;
-
+            _UserManager = UserManager;
         }
 
         // GET: Home
@@ -32,26 +39,32 @@ namespace WebSovelluksetFinal.Controllers
         }
 
         // GET: Home/Create
-        public ActionResult Create()
+        public IActionResult CreateView()
         {
-            return View();
+
+            ViewBag.AsiakastyyppiID = new SelectList(_context.HouseTypes, "ID", "Type");
+            return PartialView("Create");
         }
 
         // POST: Home/Create
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public IActionResult CreateOrder(Tilaus newTilaus)
         {
-            try
+            newTilaus.UserID = _UserManager.GetUserId(User);
+            newTilaus.Status = "TILATTU";
+            if (ModelState.IsValid)
             {
-                // TODO: Add insert logic here
-
-                return RedirectToAction(nameof(Index));
+                _context.Add(newTilaus);
+                _context.SaveChanges();
+                return Json(new
+                {
+                    msg = "Order created!"
+                });
             }
-            catch
+            return Json(new
             {
-                return View();
-            }
+                msg = "Failed to create!"
+            });
         }
 
         // GET: Home/Edit/5
@@ -85,7 +98,7 @@ namespace WebSovelluksetFinal.Controllers
 
             r = r.Where(t => t.ID == id);
 
-            return PartialView("OrdersList", r);
+            return PartialView("DeleteInfo", r);
         }
 
         // POST: Home/Delete/5
