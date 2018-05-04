@@ -68,7 +68,7 @@ namespace WebSovelluksetFinal.Controllers
         }
 
         // GET: Home/Edit/5
-        public ActionResult Edit(int id)
+        public ActionResult EditView(int id)
         {
             return View();
         }

@@ -81,20 +81,20 @@
         function editClicked(id) {
 
             // jQuery UI pitää lisät Bower:n kautta (Projektin päällä hiiren oikean napin alta Manage Bower Packages ... )
-            $("#editDialog").load("/Asiakas/EditView", { id: id }, function () {
+            $("#editDialog").load("/Home/EditView", { id: id }, function () {
 
                 $("#editDialog").dialog(
                     {
                         title: "Poistetaanko asiakas?", width: 600, height: 800, modal: true, buttons: {
                             OK: function () {
-                                editStudent($(this));
+                                editOrder($(this));
                             },
                             Cancel: function () { $(this).dialog("close") }
                         }
                     })
             });
         }
-        function editStudent(dlg) {
+        function editOrder(dlg) {
 
             var oppilas = $("#editStudentForm").serialize();
 
