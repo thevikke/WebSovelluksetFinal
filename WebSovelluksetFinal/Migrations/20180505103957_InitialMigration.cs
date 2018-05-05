@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace WebSovelluksetFinal.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class InitialMigration : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -185,16 +185,16 @@ namespace WebSovelluksetFinal.Migrations
                 {
                     ID = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    ApproveDate = table.Column<DateTime>(nullable: false),
+                    ApproveDate = table.Column<DateTime>(nullable: true),
                     Comment = table.Column<string>(nullable: true),
                     Description = table.Column<string>(nullable: true),
-                    DiscardDate = table.Column<DateTime>(nullable: false),
-                    EstimatedCost = table.Column<int>(nullable: false),
-                    FinishDate = table.Column<DateTime>(nullable: false),
-                    Hours = table.Column<int>(nullable: false),
+                    DiscardDate = table.Column<DateTime>(nullable: true),
+                    EstimatedCost = table.Column<int>(nullable: true),
+                    FinishDate = table.Column<DateTime>(nullable: true),
+                    Hours = table.Column<int>(nullable: true),
                     MachineryUsed = table.Column<string>(nullable: true),
-                    OrderDate = table.Column<DateTime>(nullable: false),
-                    StartDate = table.Column<DateTime>(nullable: false),
+                    OrderDate = table.Column<DateTime>(nullable: true),
+                    StartDate = table.Column<DateTime>(nullable: true),
                     Status = table.Column<string>(nullable: true),
                     UserID = table.Column<string>(nullable: true)
                 },

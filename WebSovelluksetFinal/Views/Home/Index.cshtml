@@ -85,7 +85,7 @@
 
                 $("#editDialog").dialog(
                     {
-                        title: "Poistetaanko asiakas?", width: 600, height: 800, modal: true, buttons: {
+                        title: "Edit order?", width: 600, height: 200, modal: true, buttons: {
                             OK: function () {
                                 editOrder($(this));
                             },
@@ -96,17 +96,17 @@
         }
         function editOrder(dlg) {
 
-            var oppilas = $("#editStudentForm").serialize();
+            var order = $("#editOrderForm").serialize();
 
             $.ajax({
                 type: "POST",
-                data: oppilas,
+                data: order,
                 dataType: "json",
-                url: "/Asiakas/EditStudent/",
+                url: "/Home/EditOrder/",
                 success: function (data) {
                     alert(data.msg);
                     dlg.dialog("close");
-                    getStudents();
+                    getOrders();
                 },
                 error: function (data) {
                     alert(data.msg);

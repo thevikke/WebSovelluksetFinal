@@ -8,8 +8,10 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using WebSovelluksetFinal.Data;
 using WebSovelluksetFinal.Models;
 using WebSovelluksetFinal.Models.ManageViewModels;
 using WebSovelluksetFinal.Services;
@@ -25,6 +27,7 @@ namespace WebSovelluksetFinal.Controllers
         private readonly IEmailSender _emailSender;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
+        private readonly ApplicationDbContext _context;
 
         private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
         private const string RecoveryCodesKey = nameof(RecoveryCodesKey);
@@ -34,13 +37,15 @@ namespace WebSovelluksetFinal.Controllers
           SignInManager<ApplicationUser> signInManager,
           IEmailSender emailSender,
           ILogger<ManageController> logger,
-          UrlEncoder urlEncoder)
+          UrlEncoder urlEncoder,
+          ApplicationDbContext context)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailSender = emailSender;
             _logger = logger;
             _urlEncoder = urlEncoder;
+            _context = context;
         }
 
         [TempData]
@@ -54,27 +59,14 @@ namespace WebSovelluksetFinal.Controllers
             {
                 throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
             }
-
-            var model = new IndexViewModel
-            {
-                Username = user.UserName,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
-                IsEmailConfirmed = user.EmailConfirmed,
-                StatusMessage = StatusMessage
-            };
-
-            return View(model);
+            ViewBag.HouseType = new SelectList(_context.HouseTypes, "ID", "Type");
+            return View(user);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(IndexViewModel model)
+        public async Task<IActionResult> Index(ApplicationUser model)
         {
-            if (!ModelState.IsValid)
-            {
-                return View(model);
-            }
 
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
@@ -91,18 +83,16 @@ namespace WebSovelluksetFinal.Controllers
                     throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
                 }
             }
+            await _userManager.SetUserNameAsync(user, model.Email);
+            user.Name = model.Name;
+            user.SurName = model.SurName;
+            user.Adress = model.Adress;
+            user.BillingAddress = model.BillingAddress;
+            user.HouseType = model.HouseType;
+            user.SizeOfHouse = model.SizeOfHouse;
 
-            var phoneNumber = user.PhoneNumber;
-            if (model.PhoneNumber != phoneNumber)
-            {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, model.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
-                }
-            }
-
-            StatusMessage = "Your profile has been updated";
+            await _context.SaveChangesAsync();
+            
             return RedirectToAction(nameof(Index));
         }
 

@@ -11,8 +11,8 @@ using WebSovelluksetFinal.Data;
 namespace WebSovelluksetFinal.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20180503214416_test1")]
-    partial class test1
+    [Migration("20180505103957_InitialMigration")]
+    partial class InitialMigration
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -217,25 +217,25 @@ namespace WebSovelluksetFinal.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("ApproveDate");
+                    b.Property<DateTime?>("ApproveDate");
 
                     b.Property<string>("Comment");
 
                     b.Property<string>("Description");
 
-                    b.Property<DateTime>("DiscardDate");
+                    b.Property<DateTime?>("DiscardDate");
 
-                    b.Property<int>("EstimatedCost");
+                    b.Property<int?>("EstimatedCost");
 
-                    b.Property<DateTime>("FinishDate");
+                    b.Property<DateTime?>("FinishDate");
 
-                    b.Property<int>("Hours");
+                    b.Property<int?>("Hours");
 
                     b.Property<string>("MachineryUsed");
 
-                    b.Property<DateTime>("OrderDate");
+                    b.Property<DateTime?>("OrderDate");
 
-                    b.Property<DateTime>("StartDate");
+                    b.Property<DateTime?>("StartDate");
 
                     b.Property<string>("Status");
 

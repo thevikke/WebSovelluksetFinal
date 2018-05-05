@@ -52,6 +52,7 @@ namespace WebSovelluksetFinal.Controllers
         {
             newTilaus.UserID = _UserManager.GetUserId(User);
             newTilaus.Status = "TILATTU";
+            newTilaus.OrderDate = DateTime.Now;
             if (ModelState.IsValid)
             {
                 _context.Add(newTilaus);
@@ -68,26 +69,37 @@ namespace WebSovelluksetFinal.Controllers
         }
 
         // GET: Home/Edit/5
-        public ActionResult EditView(int id)
+        public IActionResult EditView(int id)
         {
-            return View();
+            var order = _context.Orders.SingleOrDefault(m => m.ID == id);
+            if (order == null)
+            {
+                return NotFound();
+            }
+            ViewData["HouseTypeID"] = new SelectList(_context.HouseTypes, "ID", "Type");
+
+            return PartialView("Edit", order);
         }
 
         // POST: Home/Edit/5
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
-        {
-            try
+        public IActionResult EditOrder(Tilaus order)
+        { 
+            if (ModelState.IsValid)
             {
-                // TODO: Add update logic here
-
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    var dbOrder = _context.Orders.Single(u => u.ID == order.ID);
+                    dbOrder.Description = order.Description;
+                    _context.SaveChanges();
+                }
+                catch (DbUpdateConcurrencyException){}
+                return Json(new
+                {
+                    msg = "Oppilas muokattu!"
+                });
             }
-            catch
-            {
-                return View();
-            }
+            return PartialView("Edit", order);
         }
 
         // GET: Home/Delete/5
@@ -117,11 +129,28 @@ namespace WebSovelluksetFinal.Controllers
 
         public IActionResult GetOrders()
         {
-            var result = from s in _context.Orders
+            var results = from s in _context.Orders
                          where s.User.UserName == User.Identity.Name
                          select s;
 
-            return PartialView("OrdersList", result);
+            foreach(var result in results)
+            {
+                if(result.StartDate != null)
+                {
+                    result.Status = "ALOITETTU";
+                }
+                if (result.FinishDate != null)
+                {
+                    result.Status = "VALMIS";
+                }
+                if (result.StartDate != null)
+                {
+                    result.Status = "HYVÄKSYTTY";
+                }
+
+            }
+
+            return PartialView("OrdersList", results);
         }
     }
 }
