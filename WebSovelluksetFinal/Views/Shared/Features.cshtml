@@ -1,0 +1,289 @@
+﻿
+@{
+    ViewData["Title"] = "Features";
+}
+
+<h2>Features</h2>
+
+<table>
+    <tr class="alert alert-success">
+        <td>
+            <p>1</p>
+        </td>
+        <td>
+            <p>
+                Käyttäjän rekisteröinti
+            </p>
+        </td>
+        <td>
+            <p>
+                Sama käyttäjä ei saa rekisteröityä kuin kerran (riittää tarkistaa ettei samaa tunnusta ole jo olemassa). Salasanaa EI tarvitse kryptata tietokantaan. Salasana on annettava varmistuksena uudestaan rekisteröitymisvaiheessa.
+            </p>
+        </td>
+        <td>
+            <p>1</p>
+        </td>
+    </tr>
+    <tr class="alert alert-success">
+        <td>
+            <p>2</p>
+        </td>
+        <td>
+            <p>
+                Sisäänkirjautuminen
+            </p>
+        </td>
+        <td>
+            <p>
+                Jos tunnus ja/tai salasana ovat väärin, ohjataan käyttäjä takaisin kirjautumissivulle.
+            </p>
+        </td>
+        <td>
+            <p>1</p>
+        </td>
+    </tr>
+    <tr class="alert alert-success">
+        <td>
+            <p>3</p>
+        </td>
+        <td>
+            <p>Omien tietojen muuttaminen</p>
+        </td>
+        <td>
+            <p>
+                Käyttäjä voi muuttaa omia tietojaan (ks. vaatimus nro 12). Muutoslomakkeella on oltava vanhat tiedot oletuksena kentissä, joita käyttäjä voi editoida haluamallaan tavalla.
+            </p>
+        </td>
+        <td>
+            <p>1</p>
+        </td>
+    </tr>
+    <tr class="alert alert-success">
+        <td>
+            <p>4</p>
+        </td>
+        <td>
+            <p>Uloskirjautuminen</p>
+        </td>
+        <td>
+            <p>
+                Käyttäjän pitää pystyä kirjautumaan jotenkin ulos sovelluksesta. Uloskirjauksen jälkeen heitetään käyttäjä takaisin login-sivulle, jossa täytyy kirjautua uudelleen, jos haluaa jatkaa sovelluksen käyttöä.
+            </p>
+        </td>
+        <td>
+            <p>1</p>
+        </td>
+    </tr>
+    <tr class="alert alert-success">
+        <td>
+            <p>
+                5
+            </p>
+        </td>
+        <td>
+            <p>
+                Työtilauksen tekeminen
+            </p>
+        </td>
+        <td>
+            <p>
+                Uuden tilauksen tila on TILATTU. Uusi tilaus lisätään dialogin avulla (vrt. ID 7)
+            </p>
+        </td>
+        <td>
+            <p>
+                1
+            </p>
+        </td>
+    </tr>
+    <tr class="alert alert-success">
+        <td>
+            <p>6</p>
+        </td>
+        <td>
+            <p>
+                Työtilausten selaaminen
+            </p>
+        </td>
+        <td>
+            <p>
+                Sisäänkirjautumisen jälkeen näkyy käyttäjälle automaattisesti kaikki omat työtilaukset. Tilauksista näytetään kaikki ”järkevät” kentät (avain-kenttiä ei näytetä).
+            </p>
+        </td>
+        <td>
+            <p>1</p>
+        </td>
+    </tr>
+    <tr class="alert alert-success">
+        <td>
+            <p>7</p>
+        </td>
+        <td>
+            <p>
+                Työtilauksen muuttaminen
+            </p>
+        </td>
+        <td>
+            <p>
+                Käyttäjä voi muuttaa työtilausta vain jos tilaus on TILATTU-tilassa. Tilauksen muokkaaminen  on toteutettava dialogin avulla ts. muutettavat tiedot näytetään dialog:ssa, jossa käyttäjä muokata tietoja.
+            </p>
+        </td>
+        <td>
+            <p>2</p>
+        </td>
+    </tr>
+    <tr class="alert alert-success">
+        <td>
+            <p>8</p>
+        </td>
+        <td>
+            <p>
+                Työtilauksen poistaminen
+            </p>
+        </td>
+        <td>
+            <p>
+                Käyttäjä voi poistaa työtilauksen vain jos tilaus on TILATTU-tilassa. Ennen poistoa varmistetaan käyttäjältä haluaako hän varmasti poistaa tilauksen.
+
+            </p>
+        </td>
+        <td>
+            <p>3</p>
+        </td>
+    </tr>
+    <tr class="alert alert-success">
+        <td>
+            <p>9</p>
+        </td>
+        <td>
+            <p>
+                Työtilauksella on status, joka kertoo työn etenemisestä
+            </p>
+        </td>
+        <td>
+            <p>
+                Työtilauksella on seuraavat statukset:
+                TILATTU (kun työtilaus on lisätty järjestelmään)
+                ALOITETTU (kun toimittaja on aloittanut työn, tällöin toimittaja laittaa työlle aloituspvm:n)
+                VALMIS (kun toimittaja on tehnyt työn, tällöin toimittaja laittaa työlle valmistumispvm:n)
+                HYVÄKSYTTY (asiakas hyväksyy työn jotenkin ja työlle tallentuu hyväksymispvm)
+                HYLÄTTY (asiakas hylkää työn jotenkin ja työlle tallentuu hylkäämispvm)
+            </p>
+        </td>
+        <td>
+            <p>
+                2
+            </p>
+        </td>
+    </tr>
+    <tr class="alert alert-success">
+        <td>
+            <p>
+                10
+            </p>
+        </td>
+        <td>
+            <p>
+                Yksittäisiä sivuja EI pysty käyttämään ilman rekisteröintiä
+            </p>
+        </td>
+        <td>
+            <p>
+                Jos käyttäjä yrittää navigoida sivustoon kuuluvalle yksittäiselle sivulle ILMAN sisäänkirjautumista, heittää järjestelmä käyttäjän automaattisesti login-sivulle.
+            </p>
+        </td>
+        <td>
+            <p>
+                3
+            </p>
+        </td>
+    </tr>
+    <tr class="alert alert-success">
+        <td>
+            <p>
+                11
+            </p>
+        </td>
+        <td>
+            <p>
+                Päivämäärät täytyy näkyä suomalaisessa muodossa
+            </p>
+        </td>
+        <td>
+            <p>
+                Sivustolla esiintyvät päivämäärät pitää pystyä syöttämään ja esittämään muodossa pp.kk.vvvv (esimerkiksi 11.12.2008)
+            </p>
+        </td>
+        <td>
+            <p>
+                3
+            </p>
+        </td>
+    </tr>
+    <tr class="alert alert-success">
+        <td>
+            <p>
+                12
+            </p>
+        </td>
+        <td>
+            <p>
+                Jokaisella sivulla näkyy sisäänkirjautuneen käyttäjän nimi (tai tunnus)
+            </p>
+        </td>
+        <td>
+            <p>
+                Jokaisen sivun ylälaidassa näkyy jotenkin kirjautuneen käyttäjän tunniste (nimi ja/tai tunnus). Tunnistetta klikkaamalla pääsee editoimaan omia tietoja.
+            </p>
+        </td>
+        <td>
+            <p>
+                1
+            </p>
+        </td>
+    </tr>
+    <tr class="alert alert-success">
+        <td>
+            <p>
+                13
+            </p>
+        </td>
+        <td>
+            <p>
+                Asiakkaalle ovat pakollisia tietoja nimi, käyntiosoite, laskutusosoite ja puhelinnumero sekä email-osoite. Lisäksi voidaan tallettaa asunnon tyyppi (omakotitalo, vapaa-ajan asunto, maatila, tyyppejä voi tulla lisääkin), asunnon pinta-ala ja tontin koko.
+            </p>
+        </td>
+        <td>
+            <p>
+
+            </p>
+        </td>
+        <td>
+            <p>
+                3
+            </p>
+        </td>
+    </tr>
+    <tr class="alert alert-success">
+        <td>
+            <p>
+                14
+            </p>
+        </td>
+        <td>
+            <p>
+                Työtilauksella on pakollisina tietoina tilaaja, työn kuvaus, tilauspvm, aloituspvm, valmistumispvm,  hyväksymispvm, hylkäämispvm, vapaamuotoinen kommentti tehdystä työstä, käytetty tuntimäärä sekä vapaamuotoinen selostus kuluneista tarvikkeista. Lisäksi yhtenä kenttänä on kustannusarvio-kenttä, johon toimittaja voi arvoida kustannukset (varsinkin jos tarjouspyyntö johtaa tilaukseen, on tällä kentällä käyttöä).
+            </p>
+        </td>
+        <td>
+            <p>
+                Käyttäjä EI siis voi muokata pvm-kenttiä, mutta ne on näytettävä käyttöliittymässä. Käyttäjä ei voi myöskään muokata kommentti-, tuntimäärä-, kustannusarvio- ja selostus tarvikkeista –kenttiä (mutta nekin on näytettävä käyttöliittymässä)
+            </p>
+        </td>
+        <td>
+            <p>
+                3
+            </p>
+        </td>
+    </tr>
+</table>

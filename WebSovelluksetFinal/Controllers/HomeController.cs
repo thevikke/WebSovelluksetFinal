@@ -25,7 +25,6 @@ namespace WebSovelluksetFinal.Controllers
             _context = context;
             _UserManager = UserManager;
         }
-
         // GET: Home
         public ActionResult Index()
         {
@@ -153,7 +152,7 @@ namespace WebSovelluksetFinal.Controllers
                 }
 
             }
-
+            _context.SaveChanges();
             return PartialView("OrdersList", results);
         }
         public IActionResult ApproveOrder(int id)

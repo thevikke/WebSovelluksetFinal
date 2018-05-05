@@ -442,7 +442,6 @@ namespace WebSovelluksetFinal.Controllers
         {
             return View();
         }
-
         #region Helpers
 
         private void AddErrors(IdentityResult result)
