@@ -113,6 +113,38 @@
                 }
             });
         }
+        //------------------------------Approve/Discard----------------------------------------------------------------------------------------------
+        function approveClicked(id) {
+
+            $.ajax({
+                type: "POST",
+                data: { id: id},
+                dataType: "json",
+                url: "/Home/ApproveOrder/",
+                success: function (data) {
+                    alert(data.msg);
+                    getOrders();
+                },
+                error: function (data) {
+                    alert(data.msg);
+                }
+            });
+        }
+        function discardClicked(id) {
+            $.ajax({
+                type: "POST",
+                data: { id: id },
+                dataType: "json",
+                url: "/Home/DiscardOrder/",
+                success: function (data) {
+                    alert(data.msg);
+                    getOrders();
+                },
+                error: function (data) {
+                    alert(data.msg);
+                }
+            });
+        }
 
     </script>
 }

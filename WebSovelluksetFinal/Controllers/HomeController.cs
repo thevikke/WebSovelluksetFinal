@@ -96,7 +96,7 @@ namespace WebSovelluksetFinal.Controllers
                 catch (DbUpdateConcurrencyException){}
                 return Json(new
                 {
-                    msg = "Oppilas muokattu!"
+                    msg = "Order edited!"
                 });
             }
             return PartialView("Edit", order);
@@ -143,14 +143,48 @@ namespace WebSovelluksetFinal.Controllers
                 {
                     result.Status = "VALMIS";
                 }
-                if (result.StartDate != null)
+                if (result.Approved)
                 {
                     result.Status = "HYVÄKSYTTY";
+                }
+                if (result.Discarded)
+                {
+                    result.Status = "HYLÄTTY";
                 }
 
             }
 
             return PartialView("OrdersList", results);
+        }
+        public IActionResult ApproveOrder(int id)
+        {
+            var r = _context.Orders.Where(t => t.ID == id).SingleOrDefault();
+            r.Discarded = false;
+            r.Approved = true;
+            r.ApproveDate = DateTime.Now;
+            _context.SaveChanges();
+
+            // HUOM! ObjectResult sisältää automatic content negotiation:n
+            return Json(new
+            {
+                msg = "Order approved!"
+            });
+            //return Json(new { status = "OK" });
+        }
+        public IActionResult DiscardOrder(int id)
+        {
+            var r = _context.Orders.Where(t => t.ID == id).SingleOrDefault();
+            r.Discarded = true;
+            r.Approved = false;
+            r.DiscardDate = DateTime.Now;
+            _context.SaveChanges();
+
+            // HUOM! ObjectResult sisältää automatic content negotiation:n
+            return Json(new
+            {
+                msg = "Order discarded!"
+            });
+            //return Json(new { status = "OK" });
         }
     }
 }

@@ -20,6 +20,9 @@ namespace WebSovelluksetFinal.Models
         
         public int? Hours { get; set; }
 
+        public bool Approved { get; set; }
+        public bool Discarded { get; set; }
+
         [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 

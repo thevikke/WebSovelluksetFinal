@@ -50,48 +50,56 @@
             <tbody>
                 @foreach (var item in Model)
                 {
-                    <tr>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EstimatedCost)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Status)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Hours)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Description)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Comment)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MachineryUsed)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.OrderDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StartDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FinishDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ApproveDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.DiscardDate)
+                    </td>
+                    @if (item.Status == "VALMIS")
+                     {
                         <td>
-                            @Html.DisplayFor(modelItem => item.EstimatedCost)
+                            <input type="button" value="Approve" onclick="approveClicked(@item.ID)" />
+                            <input type="button" value="Discard" onclick="discardClicked(@item.ID)" />
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Status)
+                     }
+
+                    @if (item.Status == "TILATTU")
+                    {
+                         <td>
+                            <a onclick="editClicked(@item.ID)">Edit</a>
+                            <a onclick="deleteClicked(@item.ID)">Delete</a>
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Hours)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Description)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Comment)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.MachineryUsed)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.OrderDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.StartDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.FinishDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.ApproveDate)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DiscardDate)
-                        </td>
-                        <td>
-                            @if (item.Status == "TILATTU")
-                            {
-                                <a onclick="editClicked(@item.ID)">Edit</a>
-                                <a onclick="deleteClicked(@item.ID)">Delete</a>
-                            }
-                        </td>
-                    </tr>
+                    }
+                </tr>
                 }
             </tbody>
         </table>
